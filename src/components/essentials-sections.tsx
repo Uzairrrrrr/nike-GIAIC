@@ -38,6 +38,8 @@ export default function EssentialsSection() {
             <div className="aspect-square mb-4 bg-gray-100 rounded-lg overflow-hidden">
               <Image
                 src={category.image}
+                height={400}
+                width={400}
                 alt={category.title}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />

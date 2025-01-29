@@ -16,7 +16,9 @@ export default function HeroSection() {
         {/* Image Section */}
         <div className="relative aspect-[16/10] md:aspect-[21/9]  overflow-hidden bg-gradient-to-b from-blue-50 to-blue-100">
           <Image
-            src="/shoes.png?height=1000&width=1800"
+            src="/shoes.png"
+            height={1000}
+            width={1800}
             alt="Nike Air Max Pulse"
             className="w-full h-full object-cover"
           />

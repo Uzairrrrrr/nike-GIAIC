@@ -6,7 +6,7 @@ import { HeartIcon, ShoppingBagIcon, SearchIcon, Menu } from "lucide-react";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
-import Image from 'next/image';
+import Image from "next/image";
 import {
   Sheet,
   SheetContent,
@@ -40,8 +40,10 @@ export function SiteHeader() {
       <div className="container flex h-8 items-center justify-between space-x-4 text-sm bg-gray-100">
         <div className="flex justify-start p-6">
           <Image
-            src="/icon.png?height=60&width=60"
+            src="/icon.png"
             alt="Nike"
+            width={60} // Explicit width
+            height={60}
             className="mx-auto"
           />
         </div>
@@ -68,8 +70,10 @@ export function SiteHeader() {
         <div className="container flex h-16 items-center justify-between p-4">
           <Link href="/" className="flex items-center">
             <Image
-              src="/Frame.png?height=60&width=60"
+              src="/Frame.png"
               alt="Nike"
+              width={60} // Explicit width
+              height={60}
               className="h-[60px] w-[60px]"
             />
           </Link>

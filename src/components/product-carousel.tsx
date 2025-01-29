@@ -1,8 +1,8 @@
+// components/ProductCarousel.tsx
 "use client";
-
+import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -11,49 +11,19 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  label?: string;
+  height: number;
+  width: number;
   description?: string;
 }
 
-export default function ProductCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+interface ProductCarouselProps {
+  products: Product[];
+}
 
-  const products: Product[] = [
-    {
-      id: "1",
-      name: "Nike Air Max Plus",
-      price: 16995,
-      image: "/shoes-1.png?height=400&width=400",
-      label: "Just In",
-      description:
-        "The Nike Air Max Plus is a bold and iconic sneaker with a sleek design and cushioning that delivers comfort and style. Featuring a signature wavy design and Max Air technology for all-day comfort.",
-    },
-    {
-      id: "2",
-      name: "Nike Air Max Plus",
-      price: 16995,
-      image: "/shoes-1.png?height=400&width=400",
-      description:
-        "The Nike Air Max Plus combines premium design with innovative cushioning for a stylish, comfortable ride. Known for its striking look and reliable support, this shoe is perfect for everyday wear.",
-    },
-    {
-      id: "3",
-      name: "Nike Air Max 97",
-      price: 16995,
-      image: "/Image-2.png?height=400&width=400",
-      description:
-        "The Nike Air Max 97 features a sleek, futuristic design with reflective elements and full-length Max Air cushioning for enhanced comfort. A classic in sneaker culture, it's perfect for those who want both style and performance.",
-    },
-    {
-      id: "4",
-      name: "Nike Air Max 98",
-      price: 16995,
-      image: "/Image-2.png?height=400&width=400",
-      description:
-        "The Nike Air Max 97 features a sleek, futuristic design with reflective elements and full-length Max Air cushioning for enhanced comfort. A classic in sneaker culture, it's perfect for those who want both style and performance.",
-    },
-    // Add more products as needed
-  ];
+const ProductCarousel: React.FC<ProductCarouselProps> = ({ products }) => {
+  console.log("Products:", products);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -104,13 +74,10 @@ export default function ProductCarousel() {
                 <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover rounded-lg"
+                  width={product.width}
+                  height={product.height}
+                  className="object-cover rounded-lg"
                 />
-                {product.label && (
-                  <span className="absolute top-2 left-2 text-red-500 text-sm">
-                    {product.label}
-                  </span>
-                )}
               </div>
               <h3 className="font-medium">{product.name}</h3>
               <p className="text-gray-600">
@@ -122,4 +89,6 @@ export default function ProductCarousel() {
       </div>
     </div>
   );
-}
+};
+
+export default ProductCarousel;

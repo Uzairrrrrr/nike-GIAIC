@@ -7,7 +7,9 @@ export default function FeaturedSection() {
         {/* Image container */}
         <div className="w-full">
           <Image
-            src="/Image.png?height=600&width=1200"
+            src="/Image.png"
+            height={600}
+            width={1200}
             alt="Runner on a trail"
             className="w-full object-cover"
           />

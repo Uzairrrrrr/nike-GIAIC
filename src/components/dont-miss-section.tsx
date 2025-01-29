@@ -9,6 +9,8 @@ export default function DontMissSection() {
         <div className="w-full">
           <Image
             src="/dont-miss.png?height=600&width=600"
+            height={600}
+            width={600}
             alt="Model wearing Jordan Brand"
             className="w-full object-cover"
           />

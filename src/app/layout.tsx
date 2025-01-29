@@ -11,9 +11,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Nike Store",
   description: "Nike store for splendid shoes",
-  icons: {
-    icon: "/icon.png",
-  },
+  // icons: {
+  //   icon: "/icon.png",
+  //   width: 60,
+  //   height: 60,
+  // },
 };
 
 export default function RootLayout({

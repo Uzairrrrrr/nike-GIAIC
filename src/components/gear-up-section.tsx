@@ -15,28 +15,28 @@ export default function GearUpSection() {
       name: "Nike Dri-FIT ADV TechKnit Ultra",
       category: "Men's Running Top",
       price: 4995,
-      image: "/Image-3.png?height=400&width=400",
+      image: "/Image-3.png",
     },
     {
       id: "2",
       name: "Nike Dri-FIT Challenger",
       category: "Men's 7\" Running Shorts",
       price: 2995,
-      image: "/Image-4.png?height=400&width=400",
+      image: "/Image-4.png",
     },
     {
       id: "3",
       name: "Nike Dri-FIT ADV Run Division",
       category: "Women's Running Top",
       price: 4995,
-      image: "/Image-5.png?height=400&width=400",
+      image: "/Image-5.png",
     },
     {
       id: "4",
       name: "Nike Fast",
       category: "Women's Running Leggings",
       price: 4795,
-      image: "/Image-6.png?height=400&width=400",
+      image: "/Image-6.png",
     },
   ];
 
@@ -46,11 +46,13 @@ export default function GearUpSection() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((product) => (
           <div key={product.id}>
-            <div className="aspect-square mb-4 bg-gray-100 rounded-lg">
+            <div className="mb-4 bg-gray-100 rounded-lg">
               <Image
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover rounded-lg"
+                width={400}
+                height={400}
+                className="object-cover rounded-lg"
               />
             </div>
             <h3 className="font-medium text-sm">{product.name}</h3>
