@@ -13,7 +13,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import Image from "next/image"
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+// toast.configure();
 interface CheckoutFormData {
   firstName: string
   lastName: string
@@ -47,10 +50,18 @@ export function CheckoutForm() {
   })
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Handle checkout logic here
-  }
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+  
+    toast.success("Your order has been placed successfully! For now, you can pay cash on delivery" , {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
@@ -59,7 +70,10 @@ export function CheckoutForm() {
           <div>
             <h2 className="text-xl font-bold mb-4">How would you like to get your order?</h2>
             <div className="border rounded-lg p-4 flex items-center gap-4">
-              <Image src="/placeholder.svg?height=40&width=40" alt="Express" />
+              <Image src="/Express-logo.png"
+               width={50}
+               height={50}
+               alt="Express" />
               <div>
                 <p className="font-medium">Express</p>
                 <p className="font-medium">Express Delivery</p>
@@ -178,7 +192,7 @@ export function CheckoutForm() {
               </label>
             </div>
           </div>
-
+          <ToastContainer />
           <Button type="submit" className="w-full bg-black text-white hover:bg-gray-900">
             Continue to Payment
           </Button>
@@ -208,7 +222,7 @@ export function CheckoutForm() {
           <div className="border-t pt-4">
             <div className="flex justify-between font-bold">
               <p>Total</p>
-              <p>₹ {state.total.toLocaleString()}</p>
+              <p>RS 2000</p>
             </div>
           </div>
         </div>

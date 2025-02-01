@@ -86,3 +86,6 @@
     @apply bg-background text-foreground;
   }
 }
+[data-state="open"] {
+  display: block !important;
+}

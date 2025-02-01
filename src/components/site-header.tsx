@@ -2,23 +2,16 @@
 
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { HeartIcon, ShoppingBagIcon, SearchIcon, Menu } from "lucide-react";
+import { HeartIcon, ShoppingBagIcon, SearchIcon, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { useCart } from "@/lib/cart-context";
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
   const { state } = useCart();
 
   const navItems = [
@@ -33,19 +26,13 @@ export function SiteHeader() {
   const cartItemCount = state.items.reduce(
     (total, item) => total + item.quantity,
     0
-  ); // Calculate total item count
+  );
 
   return (
-    <header className="w-full">
-      <div className="container flex h-8 items-center justify-between space-x-4 text-sm bg-gray-100">
-        <div className="flex justify-start p-6">
-          <Image
-            src="/icon.png"
-            alt="Nike"
-            width={60} // Explicit width
-            height={60}
-            className="mx-auto"
-          />
+    <header className="w-full max-w-none">
+      <div className="w-full bg-gray-100 text-sm flex h-8 items-center justify-between px-6">
+        <div className="flex justify-start">
+          <Image src="/icon.png" alt="Nike" width={30} height={40} />
         </div>
         <div className="flex justify-end space-x-4">
           <Link href="products" className="text-gray-600 hover:text-gray-900">
@@ -66,25 +53,15 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="border-b">
-        <div className="container flex h-16 items-center justify-between p-4">
+      <div className="border-b w-full">
+        <div className="flex h-16 items-center justify-between px-6 w-full">
           <Link href="/" className="flex items-center">
-            <Image
-              src="/Frame.png"
-              alt="Nike"
-              width={60} // Explicit width
-              height={60}
-              className="h-[60px] w-[60px]"
-            />
+            <Image src="/Frame.png" alt="Nike" width={60} height={60} />
           </Link>
           {!isMobile && (
             <nav className="flex items-center space-x-6 text-sm font-medium">
               {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="hover:text-gray-900"
-                >
+                <Link key={item.label} href={item.href} className="hover:text-gray-900">
                   {item.label}
                 </Link>
               ))}
@@ -94,10 +71,7 @@ export function SiteHeader() {
             {!isMobile && (
               <div className="relative">
                 <SearchIcon className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Search"
-                  className="w-[180px] pl-8 rounded-full bg-gray-100"
-                />
+                <Input placeholder="Search" className="w-[180px] pl-8 rounded-full bg-gray-100" />
               </div>
             )}
             <button className="hover:text-gray-900">
@@ -112,53 +86,34 @@ export function SiteHeader() {
               )}
             </Link>
             {isMobile && (
-              <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="ml-2">
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">Toggle menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                  <SheetHeader>
-                    <SheetTitle>Menu</SheetTitle>
-                  </SheetHeader>
-                  <nav className="flex flex-col space-y-4 mt-8">
-                    {navItems.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="text-lg font-medium hover:text-gray-900"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </nav>
-                  <div className="mt-8">
-                    <div className="relative mb-4">
-                      <SearchIcon className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
-                      <Input
-                        placeholder="Search"
-                        className="w-full pl-8 rounded-full bg-gray-100"
-                      />
-                    </div>
-                    <Button variant="outline" className="w-full mb-2">
-                      Find a Store
-                    </Button>
-                    <Button variant="outline" className="w-full mb-2">
-                      Join Us
-                    </Button>
-                    <Button variant="outline" className="w-full">
-                      Help
-                    </Button>
-                  </div>
-                </SheetContent>
-              </Sheet>
+              <button onClick={() => setIsOpen(!isOpen)} className="ml-2 hover:text-gray-900">
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             )}
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-white z-50 p-6 flex flex-col space-y-4 shadow-lg">
+          <button onClick={() => setIsOpen(false)} className="self-end text-gray-600 hover:text-gray-900">
+            <X className="h-6 w-6" />
+          </button>
+          <nav className="flex flex-col space-y-4 mt-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-lg font-medium hover:text-gray-900"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

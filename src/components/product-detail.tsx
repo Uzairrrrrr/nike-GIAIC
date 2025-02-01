@@ -1,35 +1,38 @@
-"use client"
+// /src/components/product-detail.tsx
+"use client" // This directive makes this a client-side component
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { useToast } from "./ui/use-toast"
-import { useCart } from "@/lib/cart-context"
-import Image from "next/image"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "./ui/use-toast";
+import { useCart } from "@/lib/cart-context";
+import Image from "next/image";
 
+// Define the types for your product
 interface ProductDetailProps {
   product: {
-    id: string
-    name: string
-    price: number
-    description: string
-    image: string
-  }
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    image: string;
+  };
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
-  const [selectedSize, setSelectedSize] = useState("")
-  const { dispatch } = useCart()
-  const { toast } = useToast()
+  const [selectedSize, setSelectedSize] = useState(""); // Handle selected size state
+  const { dispatch } = useCart(); // For managing cart items
+  const { toast } = useToast(); // For showing toast notifications
 
   const handleAddToCart = () => {
     if (!selectedSize) {
       toast({
         title: "Please select a size",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
+    // Dispatch the add to cart action
     dispatch({
       type: "ADD_ITEM",
       payload: {
@@ -37,13 +40,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         size: selectedSize,
         quantity: 1,
       },
-    })
+    });
 
+    // Show a success toast
     toast({
       title: "Added to cart",
       description: `${product.name} has been added to your cart.`,
-    })
-  }
+    });
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
@@ -52,6 +56,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <Image
             src={product.image}
             alt={product.name}
+            width={600}
+            height={600}
             className="w-full h-full object-cover"
           />
         </div>
@@ -76,7 +82,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               ))}
             </div>
           </div>
-          <p className="text-xl font-bold mb-6">₹ {product.price.toLocaleString()}</p>
+          <p className="text-xl font-bold mb-6">RS {product.price.toLocaleString()}</p>
           <Button
             onClick={handleAddToCart}
             className="w-full bg-black text-white hover:bg-gray-900"
@@ -86,6 +92,5 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

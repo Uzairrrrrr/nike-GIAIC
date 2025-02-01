@@ -1,4 +1,4 @@
-import sanityClient from "./sanity.client"; // Assuming sanity client is configured here
+import sanityClient from "./sanity.client";
 
 export const fetchProducts = async () => {
   const query = `*[_type == "product"]{
@@ -26,6 +26,6 @@ export const fetchProducts = async () => {
     }));
   } catch (error) {
     console.error("Error fetching products:", error);
-    return []; // Return an empty array in case of error
+    return [];
   }
 };

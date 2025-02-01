@@ -81,7 +81,8 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ products }) => {
               </div>
               <h3 className="font-medium">{product.name}</h3>
               <p className="text-gray-600">
-                ₹ {product.price.toLocaleString()}
+                RS {product.price.toLocaleString()}
+                
               </p>
             </Link>
           </div>
