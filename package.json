@@ -23,6 +23,7 @@
     "@sanity/schema": "^3.70.0",
     "@sanity/telemetry": "^0.7.9",
     "@sanity/vision": "^3.70.0",
+    "@types/styled-components": "^5.1.34",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
